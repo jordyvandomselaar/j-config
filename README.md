@@ -1,3 +1,4 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/jordyvandomselaar/jvd-config)
 #jvd-config
 Store all your global config in one place
 
