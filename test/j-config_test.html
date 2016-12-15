@@ -14,6 +14,12 @@
   <body>
     <test-fixture id="basic">
       <template>
+        <jvd-config api-host="localhost:8000"></jvd-config>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="basic-2">
+      <template>
         <jvd-config></jvd-config>
       </template>
     </test-fixture>
@@ -23,6 +29,12 @@
         test('instantiating the element works', function() {
           var element = fixture('basic');
           assert.equal(element.is, 'jvd-config');
+        });
+
+        test('Sharing state between instances works', function(){
+          var element = fixture('basic');
+          var AnotherElement = fixture('basic-2');
+          console.log(element.settings);
         });
       });
     </script>
