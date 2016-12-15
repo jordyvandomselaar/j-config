@@ -1,0 +1,117 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`jvd-config`
+Store all your global config in one place
+
+@demo demo/index.html 
+-->
+
+<dom-module id="jvd-config">
+  <script>
+//  Singleton state
+    var settings = {};
+
+    Polymer({
+
+      is: 'jvd-config',
+
+      properties: {
+        settings: {
+          type: Object,
+          value: settings
+        }
+      },
+
+      ready: function(){
+//        Parse attributes
+        this._parseAttributes(this.attributes);
+      },
+
+      /**
+       * Listen for attribute changes and parse them
+       * @param name
+       */
+      attributeChanged: function (name) {
+        var settings = this.settings;
+        settings[name].value = this.getAttribute(name);
+      },
+
+
+      /**
+       * Parse attributes into a settings object
+       * @param attributes
+       * @private
+       */
+      _parseAttributes: function (attributes) {
+        for (var key in attributes) {
+          if (!attributes.hasOwnProperty(key)) continue;
+          var attribute = attributes[key];
+          var type = this._determineType(attribute.value);
+          var name = attribute.name;
+
+          var settings = this.settings || {};
+
+          settings[name] = {
+            value: attribute.value,
+            type: type
+          };
+          this.settings = settings;
+
+        }
+      },
+
+      /**
+       * Determine the type of a property
+       * @param value
+       * @return {String}
+       * @private
+       */
+      _determineType: function(value){
+        if(parseInt(value) && (value.match(/[0+\(]/))) return "string";
+        if(parseInt(value)) return "integer";
+        if(parseFloat(value)) return "float";
+        if(value == "true") return "boolean";
+        var obj;
+        try{
+         obj = JSON.parse(value);
+        }
+        catch(e){
+          // We don't do anything with the error
+        }
+        if(obj) return "object";
+
+        return "string";
+      },
+
+      /**
+       * Get a config value
+       * @return {String|Integer|Boolean|Object}
+       */
+      get: function(key, default_value){
+        if(this.settings[key]){
+          return this._getValue(this.settings[key]);
+        }
+        if(default_value != undefined) return default_value;
+        return false;
+      },
+
+      /**
+       * Deserialize the value of a setting
+       * @param item
+       * @return {*}
+       * @private
+       */
+      _getValue: function(item){
+        switch(item.type){
+          case "string": return item.value;
+          case "integer": return parseInt(item.value);
+          case "boolean": return item.value === "true";
+          case "float": return parseFloat(item.value);
+          case "object": return JSON.parse(item.value);
+          default: return item.value;
+        }
+      }
+    });
+  </script>
+</dom-module>
