@@ -4,7 +4,20 @@
 `jvd-config`
 Store all your global config in one place
 
-@demo demo/index.html 
+Example
+
+```
+// Set config
+<jvd-config api-url="localhost:8000"/>
+// All other instances will now have that config, no need to set it again
+<jvd-config id="config" />
+
+<script>
+document.getElementById('config').get('api-url');
+// localhost:8000
+</script>
+
+```
 -->
 
 <dom-module id="jvd-config">
@@ -24,7 +37,8 @@ Store all your global config in one place
           settings: {
             type: Object,
             value: settings,
-            observer: '_settingsObserver'
+            observer: '_settingsObserver',
+            readOnly: true
           }
         },
 
