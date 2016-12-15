@@ -1,38 +1,21 @@
-# \<jvd-config\>
-
+#jvd-config
 Store all your global config in one place
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
-
-## Viewing Your Application
+##Example
 
 ```
-$ polymer serve
-```
+// Set config
+<jvd-config api-url="localhost:8000"/>
+// All other instances will now have that config, no need to set it again
+<jvd-config id="config" />
 
-## Building Your Application
-
-```
-$ polymer build
-```
-
-This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
-containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
-CSS, and JS optimizers.
-
-You can serve the built versions by giving `polymer serve` a folder to serve
-from:
+<script>
+document.getElementById('config').get('api-url');
+// localhost:8000
+</script>
 
 ```
-$ polymer serve build/bundled
-```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+##Wish to help?
+There's 2 things you can do:
+1. File an issue report
+2. Fork this project and submit a pr with your changes

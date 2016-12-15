@@ -2,6 +2,13 @@
   "name": "jvd-config",
   "description": "Store all your global config in one place",
   "main": "jvd-config.html",
+  "license": "MIT",
+  "keywords": ["polymer", "webcomponents", "settings", "config"],
+  "authors": ["Jordy van domselaar <jordy.van.domselaar@outlook.com>"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordyvandomselaar/jvd-config.git"
+  },
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0"
   },
