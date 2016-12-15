@@ -34,7 +34,7 @@
         test('Sharing state between instances works', function(){
           var element = fixture('basic');
           var AnotherElement = fixture('basic-2');
-          console.log(element.settings);
+          assert.equal(element.settings = AnotherElement.settings);
         });
       });
     </script>
